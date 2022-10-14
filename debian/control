@@ -1,0 +1,36 @@
+Source: node-semver
+Section: javascript
+Priority: optional
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Uploaders: Jérémy Lal <kapouer@melix.org>
+Testsuite: autopkgtest-pkg-nodejs
+Build-Depends: debhelper-compat (= 13)
+ , node-lru-cache <!nocheck>
+ , node-marked-man
+ , node-tap <!nocheck>
+ , nodejs (>= 10) <!nocheck>
+ , dh-sequence-nodejs
+Standards-Version: 4.6.0
+Homepage: https://github.com/isaacs/node-semver
+Vcs-Git: https://salsa.debian.org/js-team/node-semver.git
+Vcs-Browser: https://salsa.debian.org/js-team/node-semver
+Rules-Requires-Root: no
+
+Package: node-semver
+Architecture: all
+Depends: ${misc:Depends}
+ , node-lru-cache
+ , nodejs (>= 10)
+Breaks: node-gyp (<< 6.0.1-1)
+ , node-typescript-types (<< 20201117~)
+Provides: ${nodejs:Provides}
+Multi-Arch: foreign
+Description: Semantic Versioning for Node.js
+ Test if version(s) satisfy the supplied range(s), and sort them.
+ Multiple versions or ranges may be supplied.
+ Program exits successfully if any valid version satisfies
+ all supplied ranges, and prints all satisfying versions.
+ .
+ This package provides the `semver` executable and the Node.js module.
+ .
+ Node.js is an event-based server-side javascript engine.

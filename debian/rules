@@ -1,0 +1,10 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+
+%:
+	dh $@
+
+override_dh_fixperms:
+	dh_fixperms
+	chmod +x debian/node-semver/usr/share/nodejs/semver/bin/semver.js

@@ -1,0 +1,2 @@
+# Disable test/cli.js (need a more recent tap)
+tap $(ls test/*.js|grep -v cli.js)

@@ -1,0 +1,1 @@
+marked-man README.md > debian/semver.1
