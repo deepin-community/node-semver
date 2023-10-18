@@ -8,7 +8,7 @@ This package contains type definitions for semver (https://github.com/npm/node-s
 Files were exported from https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/semver.
 
 ### Additional Details
- * Last updated: Fri, 23 Jul 2021 22:01:15 GMT
+ * Last updated: Mon, 08 May 2023 19:02:57 GMT
  * Dependencies: none
  * Global values: none
 
