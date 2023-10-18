@@ -1,7 +1,9 @@
+# Match types-*/*
+add-component-copyright types-semver [debian/copyright]
 # False positive: data
-source-is-missing tap-snapshots/test-bin-semver.js-TAP.test.js line 194 is 1425 characters long (>512)
-source-is-missing tap-snapshots/test-cli.js-TAP.test.js line 194 is 1425 characters long (>512)
-source-contains-prebuilt-javascript-object tap-snapshots/test-bin-semver.js-TAP.test.js line 194 is 1425 characters long (>512)
-source-contains-prebuilt-javascript-object tap-snapshots/test-cli.js-TAP.test.js line 194 is 1425 characters long (>512)
-very-long-line-length-in-source-file tap-snapshots/test-bin-semver.js-TAP.test.js line 200 is 1427 characters long (>512)
-very-long-line-length-in-source-file tap-snapshots/test-cli.js-TAP.test.js line 200 is 1427 characters long (>512)
+source-is-missing [tap-snapshots/test-bin-semver.js-TAP.test.js]
+source-is-missing [tap-snapshots/test-cli.js-TAP.test.js]
+source-contains-prebuilt-javascript-object [tap-snapshots/test-bin-semver.js-TAP.test.js]
+source-contains-prebuilt-javascript-object [tap-snapshots/test-cli.js-TAP.test.js]
+very-long-line-length-in-source-file * [tap-snapshots/test-bin-semver.js-TAP.test.js:*]
+very-long-line-length-in-source-file * [tap-snapshots/test-cli.js-TAP.test.js:*]

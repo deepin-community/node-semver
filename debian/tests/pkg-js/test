@@ -1,2 +1,1 @@
-# Disable test/cli.js (need a more recent tap)
-tap $(ls test/*.js|grep -v cli.js)
+tap --no-coverage -R tap `find test -name '*.js'|grep -v test/bin/semver.js`

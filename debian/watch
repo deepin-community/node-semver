@@ -1,7 +1,7 @@
 version=4
 opts=dversionmangle=auto,\
-filenamemangle=s/.*\/v?([\d\.-]+)\.tar\.gz/node-semver-$1.tar.gz/ \
-https://github.com/isaacs/node-semver/tags .*/archive/.*/v?([\d\.]+).tar.gz group
+filenamemangle=s/.*?(\d[\d\.-]*@ARCHIVE_EXT@)/node-semver-$1/ \
+https://github.com/npm/node-semver/tags .*/archive/.*/v?([\d\.]+).tar.gz group
 
 # It is not recommended use npmregistry. Please investigate more.
 # Take a look at https://wiki.debian.org/debian/watch/

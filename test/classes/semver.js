@@ -49,28 +49,32 @@ test('throws when presented with garbage', t => {
 
 test('return SemVer arg to ctor if options match', t => {
   const s = new SemVer('1.2.3', { loose: true, includePrerelease: true })
-  t.equal(new SemVer(s, {loose: true, includePrerelease: true}), s,
+  t.equal(new SemVer(s, { loose: true, includePrerelease: true }), s,
     'get same object when options match')
-  t.notEqual(new SemVer(s), s, 'get new object when options match')
+  t.not(new SemVer(s), s, 'get new object when options match')
   t.end()
 })
 
 test('really big numeric prerelease value', (t) => {
   const r = new SemVer(`1.2.3-beta.${Number.MAX_SAFE_INTEGER}0`)
-  t.strictSame(r.prerelease, [ 'beta', '90071992547409910' ])
+  t.strictSame(r.prerelease, ['beta', '90071992547409910'])
   t.end()
 })
 
 test('invalid version numbers', (t) => {
-  ['1.2.3.4',
-    'NOT VALID',
-    1.2,
-    null,
-    'Infinity.NaN.Infinity'
-  ].forEach((v) => {
-    t.throws(() => {
-      new SemVer(v) // eslint-disable-line no-new
-    }, { name: 'TypeError', message: `Invalid Version: ${v}` })
+  ['1.2.3.4', 'NOT VALID', 1.2, null, 'Infinity.NaN.Infinity'].forEach((v) => {
+    t.throws(
+      () => {
+        new SemVer(v) // eslint-disable-line no-new
+      },
+      {
+        name: 'TypeError',
+        message:
+          typeof v === 'string'
+            ? `Invalid Version: ${v}`
+            : `Invalid version. Must be a string. Got type "${typeof v}".`,
+      }
+    )
   })
 
   t.end()
@@ -84,12 +88,21 @@ test('incrementing', t => {
     expect,
     options,
     id,
+    base,
   ]) => t.test(`${version} ${inc} ${id || ''}`.trim(), t => {
-    t.plan(1)
-    if (expect === null)
-      t.throws(() => new SemVer(version, options).inc(inc, id))
-    else
-      t.equal(new SemVer(version, options).inc(inc, id).version, expect)
+    if (expect === null) {
+      t.plan(1)
+      t.throws(() => new SemVer(version, options).inc(inc, id, base))
+    } else {
+      t.plan(2)
+      const incremented = new SemVer(version, options).inc(inc, id, base)
+      t.equal(incremented.version, expect)
+      if (incremented.build.length) {
+        t.equal(incremented.raw, `${expect}+${incremented.build.join('.')}`)
+      } else {
+        t.equal(incremented.raw, expect)
+      }
+    }
   }))
 })
 
@@ -106,21 +119,6 @@ test('compare main vs pre', (t) => {
   t.equal(p.comparePre('1.2.3'), -1)
   t.equal(p.comparePre('1.2.3-alpha.0.pr.2'), -1)
   t.equal(p.comparePre('1.2.3-alpha.0.2'), 1)
-
-  t.end()
-})
-
-test('invalid version numbers', (t) => {
-  ['1.2.3.4',
-    'NOT VALID',
-    1.2,
-    null,
-    'Infinity.NaN.Infinity'
-  ].forEach((v) => {
-    t.throws(() => {
-      new SemVer(v) // eslint-disable-line no-new
-    }, { name: 'TypeError', message: `Invalid Version: ${v}` })
-  })
 
   t.end()
 })
